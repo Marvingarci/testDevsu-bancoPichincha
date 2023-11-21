@@ -3,6 +3,19 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { Route, RouterModule } from '@angular/router';
+
+const routes: Route[] = [
+  {
+    path: 'products',
+    loadChildren: () => import('./products/feature/product-shell/product-shell.module').then(m => m.ProductShellModule),
+  },
+  {
+    path: '',
+    redirectTo: 'products',
+    pathMatch: 'full'
+  }
+]
 
 @NgModule({
   declarations: [
@@ -10,7 +23,8 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterModule.forRoot(routes),
   ],
   providers: [],
   bootstrap: [AppComponent]
