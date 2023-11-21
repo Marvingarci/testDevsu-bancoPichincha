@@ -12,10 +12,11 @@ const routes: Route[] = [
 
 @NgModule({
   declarations: [
+    ProductMainComponent
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
   ]
 })
 export class ProductShellModule { }
