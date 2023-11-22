@@ -1,0 +1,180 @@
+{
+	"info": {
+		"_postman_id": "716b79aa-37eb-46df-b112-04593450df5b",
+		"name": "TestPichincha",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8984331"
+	},
+	"item": [
+		{
+			"name": "getProducts",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorId",
+						"value": "10",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{URI}}/bp/products",
+					"host": [
+						"{{URI}}"
+					],
+					"path": [
+						"bp",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createProduct",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorId",
+						"value": "10",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"marvingar1\",\r\n    \"name\": \"Tarjeta Multipoints\",\r\n    \"description\": \"Esta tarjeta es test\",\r\n    \"logo\": \"https://imgs.search.brave.com/AX6g3A6NK96bkRsr8AIfwt0thzUcAeE5G4jyW6UexkE/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/cGljaGluY2hhbWls/ZXMuY29tL2ltYWdl/cy90ZW1wbGF0ZS9j/YXJkcy92aXNhLW1p/bGVzLWdvbGQucG5n\",\r\n    \"date_release\": \"2023-11-17\",\r\n    \"date_revision\": \"2024-11-17\"\r\n}\r\n    ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URI}}/bp/products",
+					"host": [
+						"{{URI}}"
+					],
+					"path": [
+						"bp",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateProduct",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "authorId",
+						"value": "10",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"marvingar1\",\r\n    \"name\": \"Tarjeta Multipuntos\",\r\n    \"description\": \"Esta tarjeta es test\",\r\n    \"logo\": \"https://imgs.search.brave.com/AX6g3A6NK96bkRsr8AIfwt0thzUcAeE5G4jyW6UexkE/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/cGljaGluY2hhbWls/ZXMuY29tL2ltYWdl/cy90ZW1wbGF0ZS9j/YXJkcy92aXNhLW1p/bGVzLWdvbGQucG5n\",\r\n    \"date_release\": \"2023-11-17\",\r\n    \"date_revision\": \"2024-11-17\"\r\n}\r\n    ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URI}}/bp/products",
+					"host": [
+						"{{URI}}"
+					],
+					"path": [
+						"bp",
+						"products"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteProduct",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "authorId",
+						"value": "10",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"marvingar1\",\r\n    \"name\": \"Tarjeta Multipuntos\",\r\n    \"description\": \"Esta tarjeta es test\",\r\n    \"logo\": \"https://imgs.search.brave.com/AX6g3A6NK96bkRsr8AIfwt0thzUcAeE5G4jyW6UexkE/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/cGljaGluY2hhbWls/ZXMuY29tL2ltYWdl/cy90ZW1wbGF0ZS9j/YXJkcy92aXNhLW1p/bGVzLWdvbGQucG5n\",\r\n    \"date_release\": \"2023-11-17\",\r\n    \"date_revision\": \"2024-11-17\"\r\n}\r\n    ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URI}}/bp/products",
+					"host": [
+						"{{URI}}"
+					],
+					"path": [
+						"bp",
+						"products"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URI",
+			"value": "https://tribu-ti-staffing-desarrollo-afangwbmcrhucqfh.z01.azurefd.net/ipf-msa-productosfinancieros",
+			"type": "string"
+		}
+	]
+}
