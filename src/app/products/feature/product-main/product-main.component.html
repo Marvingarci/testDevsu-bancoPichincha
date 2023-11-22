@@ -1,1 +1,10 @@
-{{products$ | async | json}}
+<app-navbar></app-navbar>
+<div class="main-container">
+  <input type="text">
+  <ng-container *ngIf="products$ | async as products">
+
+    <app-product-table [products]="products" ></app-product-table>
+  </ng-container>
+
+  {{products$ | async | json}}
+</div>

@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { Route, RouterModule } from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthorIdInterceptor } from './shared/utils/author-id.interceptor';
+import { ProductTableComponent } from './products/ui/product-table/product-table.component';
 
 const routes: Route[] = [
   {

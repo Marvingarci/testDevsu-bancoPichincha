@@ -1,0 +1,23 @@
+<table>
+  <thead>
+    <tr>
+      <!-- <th>Logo</th> -->
+      <th>Nombre del Producto</th>
+      <th>Descripcion</th>
+      <th>Fecha de Liberacion</th>
+      <th>Fecha de Restructuracion</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products">
+      <!-- <td>{{ product.logo }}</td> -->
+      <td>{{ product.name }}</td>
+      <td>{{ product.description }}</td>
+      <td>{{ product.date_release }}</td>
+      <td>{{ product.date_revision }}</td>
+      <!-- <td>
+        <button (click)="onEdit(product)">Edit</button>
+        <button (click)="onDelete(product)">Delete</button>
+      </td> -->
+  </tbody>
+</table>
