@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { Route, RouterModule } from '@angular/router';
@@ -8,6 +7,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthorIdInterceptor } from './shared/utils/author-id.interceptor';
 import { NavbarComponent } from './shared/ui/navbar/navbar.component';
 import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes: Route[] = [
   {
@@ -27,6 +27,7 @@ const routes: Route[] = [
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
@@ -36,7 +37,7 @@ const routes: Route[] = [
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
     }),
-    BrowserModule
+    
   ],
   providers: [
     {
