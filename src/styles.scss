@@ -2,6 +2,78 @@
 
 :root{
   --primary-color: #233364;
-  --secondary-color: #C5CCDC;
+  --secondary-color: #F9DE4B;
   --bg-color: #F4F6F9;
+  --gray-color: #F9FAFC;
+  --gray-button: #E9ECF3
+}
+
+body{
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+.btn{
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 7px;
+  padding-bottom: 5px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 15px;
+  outline: none;
+  border: none;
+  &.form{
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 15px;
+    padding-bottom: 12px;
+  }
+  &.gray{
+    background-color: var(--gray-button);
+  }
+}
+
+
+
+.inp{
+  border: 1px solid var(--primary-color);
+  border-radius: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 12px;
+  padding-bottom: 10px;
+  font-weight: bold;
+  color: var(--primary-color);
+  
+  &:focus{
+    border-color: #4d90fe;
+    box-shadow: 0 0 5px #4d90fe;
+    // get rid of the outline
+    outline: none;
+  }
+  &.error{
+    border-color: #f44336;
+    box-shadow: 0 0 5px #f44336;
+}
+
+}
+
+.inp:disabled{
+  background-color: var(--gray-color);
+  color: gray;
+  border-color: var(--gray-color);
+}
+// animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
 }

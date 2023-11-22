@@ -1,0 +1,22 @@
+input{
+    border: 1px solid #ccc;
+    color: gray;
+    border-radius: 5px;
+    padding: 5px;
+    padding-left: 10px;
+    margin: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 1rem;
+    font-family: 'Roboto', sans-serif;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+    &:focus{
+        border-color: #4d90fe;
+        box-shadow: 0 0 5px #4d90fe;
+    }
+    &.error{
+        border-color: #f44336;
+        box-shadow: 0 0 5px #f44336;
+    }
+}

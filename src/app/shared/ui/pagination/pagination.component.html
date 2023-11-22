@@ -1,0 +1,24 @@
+<section *ngIf="paginator$ | async as paginator ">
+    <div class="total">
+        {{paginator.total}} Resultado(s)
+    </div>
+    
+    <div class="pagination-container">
+        <div>
+            <select (change)="onChangePaginationSize($event)" id="pageSize">
+                <option value="2">2</option>
+                <option value="4">4</option>
+                <option selected value="8">8</option>
+            </select>
+        </div>
+        <!-- <div class="pagination">
+            <button id="prev"> << </button>
+            <div id="options">
+                <button>1</button>
+                <button>2</button>
+                <button>3</button>
+            </div>
+            <button id="next">>></button>
+        </div> -->
+    </div>
+</section>

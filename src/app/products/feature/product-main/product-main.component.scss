@@ -3,4 +3,9 @@
   flex-direction: column;
   background-color: var(--bg-color);
   padding: 5rem;
+  .search-input{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+  }
 }

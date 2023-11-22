@@ -1,0 +1,12 @@
+div{
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    span{
+        font-size: 0.75rem;
+        font-weight: normal;
+        color: tomato;
+
+    }
+}

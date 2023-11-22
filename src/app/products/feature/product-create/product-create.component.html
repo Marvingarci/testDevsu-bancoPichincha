@@ -1,0 +1,37 @@
+<div class="main-container">
+    <section>
+        <span>Formulario de Registro</span>
+    </section>
+    <form [formGroup]="formProduct">
+        <app-input-form label="Id" [type]="'text'" placeholder="Ingrese el id" formControlName="id" [fc]="formProduct.get('id')"></app-input-form>
+        <app-input-form label="Nombre" [type]="'text'" placeholder="Ingrese el Nombre" formControlName="name" [fc]="formProduct.get('name')"></app-input-form>
+        <app-input-form label="Descripcion" [type]="'text'" placeholder="Ingrese la descripcion" formControlName="description" [fc]="formProduct.get('description')"></app-input-form>
+        <app-input-form label="Logo" [type]="'text'" placeholder="Ingrese la URL logo" formControlName="logo" [fc]="formProduct.get('logo')"></app-input-form>
+        <app-input-form label="Fecha de Liberacion" [type]="'date'" formControlName="date_release" [fc]="formProduct.get('date_release')"></app-input-form>
+        <app-input-form label="Fecha de Revision" [disabled]="true" [type]="'date'" formControlName="date_revision" [fc]="formProduct.get('date_revision')"></app-input-form>
+
+        <!-- <input formControlName="id" class="inp" type="text"> -->
+        <!-- <input formControlName="name" type="text"> -->
+        <!-- <input formControlName="description" type="text"> -->
+        <!-- <input formControlName="date_release" type="date"> -->
+        <!-- <input formControlName="date_revision" type="date"> -->
+    </form>
+    <div class="buttons">
+        <button type="button" class="btn form gray" (click)="formProduct.reset()">Reiniciar</button>
+        <button type="button" class="btn form " (click)="submit()">Agregar</button>
+    </div>
+    {{formProduct.value | json}}
+    {{formProduct.get('id')?.errors | json}}
+    <!-- <section class="search-input">
+        <app-input [(value)]="searchValue" ></app-input>
+        <a [routerLink]="'new'" class="btn">Nuevo Producto</a>
+    </section>
+    <ng-container  *ngIf="products$ | async as products else skeletonTable">
+        <app-product-table [products]="products" [searchTerm]="searchValue"></app-product-table>
+        <app-pagination></app-pagination>
+    </ng-container>
+    <ng-template #skeletonTable>
+        Loading...
+    </ng-template> -->
+
+</div>

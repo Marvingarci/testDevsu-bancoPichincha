@@ -6,7 +6,8 @@ import { AppComponent } from './app.component';
 import { Route, RouterModule } from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthorIdInterceptor } from './shared/utils/author-id.interceptor';
-import { ProductTableComponent } from './products/ui/product-table/product-table.component';
+import { NavbarComponent } from './shared/ui/navbar/navbar.component';
+import { ToastrModule } from 'ngx-toastr';
 
 const routes: Route[] = [
   {
@@ -28,7 +29,14 @@ const routes: Route[] = [
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot(routes),
-    HttpClientModule
+    HttpClientModule,
+    NavbarComponent,
+    ToastrModule.forRoot({
+      timeOut: 2000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
+    BrowserModule
   ],
   providers: [
     {

@@ -1,0 +1,19 @@
+<div>
+    <label for="">{{label}}</label>
+    <input [(ngModel)]="value" class="inp" [disabled]="disabled" [type]="type" [ngClass]="{'error': fc.dirty && fc.errors != null}" (input)="setValue($event)" type="text" [placeholder]="placeholder">
+    <div #error *ngIf="fc.dirty && fc.errors != null">
+        <ng-container *ngIf="fc.errors as e">
+            <span *ngIf="e.required">Este campo es requerido</span>
+            <span *ngIf="e.minlength">Este campo debe tener al menos {{e.minlength.requiredLength}} caracteres</span>
+            <span *ngIf="e.maxlength">Este campo debe tener como máximo {{e.maxlength.requiredLength}} caracteres</span>
+            <span *ngIf="e.email">Este campo debe ser un email válido</span>
+            <span *ngIf="e.pattern">Este campo debe tener el formato correcto</span>
+            <span *ngIf="e.min">Este campo debe ser mayor o igual a {{e.min.min}}</span>
+            <span *ngIf="e.max">Este campo debe ser menor o igual a {{e.max.max}}</span>
+            <span *ngIf="e.minDate">Este campo debe ser mayor o igual a {{e.minDate.minDate | date}}</span>
+            <span *ngIf="e.maxDate">Este campo debe ser menor o igual a {{e.maxDate.maxDate | date}}</span>
+            <span *ngIf="e.unique">Este campo debe ser único</span>
+        </ng-container>
+    </div>
+    <!-- <span #error>{{fc.errors | json}}</span> -->
+</div>
