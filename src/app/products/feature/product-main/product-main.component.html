@@ -1,7 +1,7 @@
 <div class="main-container">
     <section class="search-input">
         <app-input [(value)]="searchValue" ></app-input>
-        <a [routerLink]="'new'" class="btn">Nuevo Producto</a>
+        <a [routerLink]="'new'" (click)="cleanProduct()" class="btn">Nuevo Producto</a>
     </section>
     <ng-container  *ngIf="products$ | async as products else skeletonTable">
         <app-product-table [products]="products" [searchTerm]="searchValue"></app-product-table>
@@ -9,13 +9,7 @@
         <app-pagination></app-pagination>
     </ng-container>
     <ng-template #skeletonTable>
-        <!-- <app-skeleton-table></app-skeleton-table> -->
-        Loading...
+        <app-skeleton-table></app-skeleton-table>
     </ng-template>
 
-    <!-- {{products$ | async | json}} -->
 </div>
-
-<ng-template #dialog>
-<h1>Hola</h1>
-</ng-template>

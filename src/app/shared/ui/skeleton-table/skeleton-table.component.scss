@@ -1,0 +1,31 @@
+table{
+  width: 100%;
+  padding: 20px;
+  background-color: white;
+  thead{
+      background-color: var(--gray-color);
+  }
+  td{
+    
+    div{
+      padding-left: 10px;
+      padding-right: 10px;
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      background-color: var(--skeleton-gray);
+      height: 40px;
+      margin: 5px;
+      border-radius: 10px; 
+    }
+  }
+  .options{
+      width: 70px;
+      border: 1px solid var(--ssecondary-color);
+      border-radius: 5px; 
+      color: var(--primary-color);
+      font-weight: bold;
+      font-size: 1rem;
+      outline: none;
+      cursor: pointer;
+      background-color: transparent;
+  }
+}

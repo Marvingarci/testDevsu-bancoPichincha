@@ -11,7 +11,8 @@
   --secondary-color: #F9DE4B;
   --bg-color: #F4F6F9;
   --gray-color: #F9FAFC;
-  --gray-button: #E9ECF3
+  --gray-button: #E9ECF3;
+  --skeleton-gray: #94a3b8;
 }
 
 body{
@@ -73,7 +74,12 @@ body{
   color: gray;
   border-color: var(--gray-color);
 }
-// animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+.skeleton{
+
+  background-color: var(--skeleton-gray);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
 
 @keyframes pulse {
   0%, 100% {

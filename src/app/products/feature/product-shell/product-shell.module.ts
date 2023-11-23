@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputFormComponent } from 'src/app/shared/ui/input-form/input-form.component';
 import { ConfirmationModalComponent } from 'src/app/shared/ui/confirmation-modal/confirmation-modal.component';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { SkeletonTableComponent } from 'src/app/shared/ui/skeleton-table/skeleton-table.component';
 
 const routes: Route[] = [
   {
@@ -43,7 +44,8 @@ const routes: Route[] = [
     FormsModule,
     InputFormComponent,
     ConfirmationModalComponent,
-    OverlayModule
+    OverlayModule,
+    SkeletonTableComponent
   ]
 })
 export class ProductShellModule { }
