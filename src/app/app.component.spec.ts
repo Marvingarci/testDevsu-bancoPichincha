@@ -20,4 +20,17 @@ describe('AppComponent', () => {
     const app = fixture.componentInstance;
     expect(app.title).toEqual('Banco Cuscatlan');
   });
+
+  it('should have a router-outlet tag', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('router-outlet')).toBeTruthy();
+  });
+  
+  it('should have a navbar element', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('app-navbar')).toBeTruthy();
+  });
 });

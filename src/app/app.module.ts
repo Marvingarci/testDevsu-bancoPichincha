@@ -10,17 +10,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {OverlayModule} from '@angular/cdk/overlay';
 
-const routes: Route[] = [
-  {
-    path: 'products',
-    loadChildren: () => import('./products/feature/product-shell/product-shell.module').then(m => m.ProductShellModule),
-  },
-  {
-    path: '',
-    redirectTo: 'products',
-    pathMatch: 'full'
-  }
-]
+
 
 @NgModule({
   declarations: [
@@ -30,7 +20,6 @@ const routes: Route[] = [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    RouterModule.forRoot(routes),
     HttpClientModule,
     NavbarComponent,  
     ToastrModule.forRoot({

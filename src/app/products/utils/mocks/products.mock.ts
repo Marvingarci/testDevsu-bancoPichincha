@@ -85,3 +85,43 @@ export const productsMockSuccess: Product[] = [
     date_revision: "2024-11-23T00:00:00.000+00:00"
   }
 ]
+
+//generate a 4 digits ramdom number
+function generateRandomNumber(): number{
+  return Math.floor(Math.random() * 10000);
+}
+export const productMockValid: Product = {
+  id: generateRandomNumber().toString(),
+  name: "TEST VALID",
+  description: "Cash Back 8%",
+  logo: "https://www.bancocuscatlan.com.hn/images/tarjetas/multipremios-oro.png",
+  date_release: "2023-11-22",
+  date_revision: "2024-11-22"
+}
+
+export const productMockInvalid: Product = {
+  id: "01",
+  name: "REPEATED",
+  description: "NONE",
+  logo: "some logo",
+  date_release: "2023-11-24",
+  date_revision: "2024-11-24"
+}
+
+export const productMockEdit: Product = {
+  id: "0101",
+  name: "REPEATED",
+  description: "NONE",
+  logo: "some logo",
+  date_release: "2023-11-24",
+  date_revision: "2024-11-24"
+}
+
+export const productMockNonExists: Product = {
+  id: "0909",
+  name: "REPEATED",
+  description: "NONE",
+  logo: "some logo",
+  date_release: "2023-11-24",
+  date_revision: "2024-11-24"
+}

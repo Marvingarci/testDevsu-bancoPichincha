@@ -33,8 +33,7 @@ export class ProductCreateComponent implements OnInit, OnDestroy{
     private toastService: ToastService
   ) { }
 
-  ngOnInit(): void {
-    this.productToEdit = this.productService.productToEdit.value;
+  checkIfProductExists(): void{
     if(this.productToEdit != null){
       this.editMode = true;
       this.title = 'Editar Registro'
@@ -48,7 +47,12 @@ export class ProductCreateComponent implements OnInit, OnDestroy{
       });
     }
 
-    //when date_release changes, date_revision has to be a year later
+  }
+
+  ngOnInit(): void {
+    this.productToEdit = this.productService.productToEdit.value;
+    this.checkIfProductExists();
+    
     this.formProduct.get('date_release')?.valueChanges.subscribe(
       {
         next: (date_release) => {
@@ -94,14 +98,14 @@ export class ProductCreateComponent implements OnInit, OnDestroy{
   }
 
 
-  markAllControlsAs(formGroup: FormGroup, condition: boolean) {
-  Object.keys(formGroup.controls).forEach(controlName => {
-    const control = formGroup.get(controlName);
-    if (control) {
-      condition ? control.markAsDirty(): control.markAsPristine();
+    markAllControlsAs(formGroup: FormGroup, condition: boolean) {
+    Object.keys(formGroup.controls).forEach(controlName => {
+      const control = formGroup.get(controlName);
+      if (control) {
+        condition ? control.markAsDirty(): control.markAsPristine();
+      }
+    });
     }
-  });
-  }
 
   ngOnDestroy(): void {
     this.subs.forEach(sub => sub.unsubscribe())

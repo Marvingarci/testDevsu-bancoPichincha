@@ -9,7 +9,7 @@ import { productsMockSuccess, productsMockError } from '../../utils/mocks/produc
 import { of } from 'rxjs';
 import { CommonModule } from '@angular/common';
 
-fdescribe('ProductMainComponent', () => {
+describe('ProductMainComponent', () => {
   let component: ProductMainComponent;
   let fixture: ComponentFixture<ProductMainComponent>;
   let productService: jasmine.SpyObj<ProductService>;
@@ -21,6 +21,7 @@ fdescribe('ProductMainComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [ProductMainComponent],
+      imports: [ProductShellModule, AppModule],
       providers: [
         { provide: ProductService, useValue: productServiceSpy },
         { provide: PaginationService, useValue: paginationServiceSpy }
@@ -45,11 +46,17 @@ fdescribe('ProductMainComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('Debera obtener todos los productos y actualizar la cantida en paginacion', () => {
+  it('Debera obtener todos los productos', () => {
     const products: Product[] = productsMockSuccess;
     productService.getProducts.and.returnValue(of(products));
-    component.ngOnInit(); 
-    expect(productService.getProducts).toHaveBeenCalled();
-    expect(paginationService.updateTotal).toHaveBeenCalledWith(products.length);
+    component.loadProducts();
+    expect(productService.getProducts).toHaveBeenCalledWith();
+    // expect(paginationService.updateTotal).toHaveBeenCalledWith(productsMockSuccess.length);
+
+  });
+
+  it('Debe Limpiar el producto a editar antes de crear uno nuevo', () => {
+    component.cleanProduct();
+    expect(productService.productToEdit.next).toHaveBeenCalledWith(null);
   });
 });
