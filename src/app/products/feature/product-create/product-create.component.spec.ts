@@ -1,21 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ProductCreateComponent } from './product-create.component';
 import { AppModule } from 'src/app/app.module';
 import { ProductShellModule } from '../product-shell/product-shell.module';
 import { ProductService } from '../../data-access/services/product.service';
 import { ToastService } from 'src/app/shared/data-access/toast.service';
 import { Router } from '@angular/router';
-import { productMockEdit, productMockInvalid, productMockNonExists, productMockValid } from '../../utils/mocks/products.mock';
+import { productMockEdit, productMockNonExists, productMockValid } from '../../utils/mocks/products.mock';
 import { of, throwError } from 'rxjs';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { fakeAsync, tick } from '@angular/core/testing';
-import { Product } from '../../data-access/models/product';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { environment } from 'env.development';
 
-fdescribe('ProductCreateComponent', () => {
+describe('ProductCreateComponent', () => {
   let component: ProductCreateComponent;
   let fixture: ComponentFixture<ProductCreateComponent>;
   let productService: ProductService;

@@ -86,10 +86,29 @@ export const productsMockSuccess: Product[] = [
   }
 ]
 
-//generate a 4 digits ramdom number
 function generateRandomNumber(): number{
   return Math.floor(Math.random() * 10000);
 }
+
+export const productsMocksMapped: Product[] = [
+  {
+    id: generateRandomNumber().toString(),
+    name: "VISA Multipuntos Golden",
+    description: "Cash Back 8%",
+    logo: "https://www.bancocuscatlan.com.hn/images/tarjetas/multipremios-oro.png",
+    date_release: "2023-11-22T",
+    date_revision: "2024-11-22"
+  },
+  {
+    id: generateRandomNumber().toString(),
+    name: "VISA Multipuntos Platinum",
+    description: "Miles Lempiras",
+    logo: "https://www.bancocuscatlan.com.hn/images/tarjetas/multipremios-platinum.png",
+    date_release: "2023-11-23",
+    date_revision: "2024-11-23"
+  }
+]
+
 export const productMockValid: Product = {
   id: generateRandomNumber().toString(),
   name: "TEST VALID",

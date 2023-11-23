@@ -34,7 +34,6 @@ export class ProductTableComponent implements OnInit{
   ngOnInit(): void {  
   }
 
-
   deleteProduct(Product: Product) {
     this.productService.productToDelete.next(Product);
      this.overlayRef = this.overlay.create({
@@ -69,7 +68,7 @@ export class ProductTableComponent implements OnInit{
 
   }
 
-  private createInjectorWithCloseOverlay(): Injector {
+  createInjectorWithCloseOverlay(): Injector {
     return Injector.create({
       providers: [{ provide: CLOSE_OVERLAY_TOKEN, useValue: () => this.closeOverlay() }],
       parent: this.injector

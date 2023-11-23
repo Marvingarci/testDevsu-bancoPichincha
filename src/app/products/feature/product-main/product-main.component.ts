@@ -25,14 +25,16 @@ export class ProductMainComponent implements OnInit {
 
   loadProducts(){
     this.products$ = this.productService.getProducts().pipe(
-      delay(2000),
       tap((products: Product[]) => {
         this.paginatorService.updateTotal(products.length as number)
       }),
-      map((products: Product[]) => products.map((product: Product) => ProductResponseMapper.fromResponse(product))),
+      map((products: Product[]) => this.mapProducts(products)),
     );
   }
-
+  
+  mapProducts(products: Product[]){
+   return products.map((product: Product) => ProductResponseMapper.fromResponse(product))
+  }
   cleanProduct(){
     this.productService.productToEdit.next(null);
   }

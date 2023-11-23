@@ -1,13 +1,13 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { ProductMainComponent } from './product-main.component';
 import { ProductShellModule } from '../product-shell/product-shell.module';
 import { AppModule } from 'src/app/app.module';
 import { ProductService } from '../../data-access/services/product.service';
 import { PaginationService } from 'src/app/shared/data-access/pagination.service';
 import { Product } from '../../data-access/models/product';
-import { productsMockSuccess, productsMockError } from '../../utils/mocks/products.mock';
-import { of } from 'rxjs';
-import { CommonModule } from '@angular/common';
+import { productsMockSuccess } from '../../utils/mocks/products.mock';
+import { map, of } from 'rxjs';
+import { ProductResponseMapper } from '../../utils/product-reponse.mapper';
 
 describe('ProductMainComponent', () => {
   let component: ProductMainComponent;
@@ -17,7 +17,7 @@ describe('ProductMainComponent', () => {
 
   beforeEach(async () => {
     const productServiceSpy = jasmine.createSpyObj('ProductService', ['getProducts', 'productToEdit']);
-    const paginationServiceSpy = jasmine.createSpyObj('PaginationService', ['updateTotal']);
+    const paginationServiceSpy = jasmine.createSpyObj('PaginationService', ['updateTotal', 'getPaginator']);
 
     await TestBed.configureTestingModule({
       declarations: [ProductMainComponent],
@@ -33,6 +33,7 @@ describe('ProductMainComponent', () => {
   });
 
   beforeEach(() => {
+    
     fixture = TestBed.createComponent(ProductMainComponent);
     component = fixture.componentInstance;
     productService.getProducts.and.returnValue(of([])); 
@@ -42,20 +43,32 @@ describe('ProductMainComponent', () => {
 
 
 
-  it('Product main debera renderizarse', () => {
+  it('should render', () => {
     expect(component).toBeTruthy();
   });
 
-  it('Debera obtener todos los productos', () => {
+  it('Should get all the products', fakeAsync((done: any) => {
     const products: Product[] = productsMockSuccess;
     productService.getProducts.and.returnValue(of(products));
-    component.loadProducts();
-    expect(productService.getProducts).toHaveBeenCalledWith();
-    // expect(paginationService.updateTotal).toHaveBeenCalledWith(productsMockSuccess.length);
 
-  });
+    component.ngOnInit()
+    
+    expect(component.products$).toBeDefined();
+    expect(productService.getProducts).toHaveBeenCalled();
+    expect(paginationService.updateTotal).toHaveBeenCalled();
 
-  it('Debe Limpiar el producto a editar antes de crear uno nuevo', () => {
+  }));
+
+  it('Should map the products before setting in the observable', fakeAsync((done: any) => {
+    const products: Product[] = productsMockSuccess;
+    const spyMapper = spyOn(component, 'mapProducts').and.callThrough();
+    const mappedProducts = component.mapProducts(products);
+    expect(spyMapper).toHaveBeenCalled();
+    expect(mappedProducts).toEqual(products.map((product: Product) => ProductResponseMapper.fromResponse(product)));
+  }
+  ));
+
+  it('should reset the product before route to New', () => {
     component.cleanProduct();
     expect(productService.productToEdit.next).toHaveBeenCalledWith(null);
   });

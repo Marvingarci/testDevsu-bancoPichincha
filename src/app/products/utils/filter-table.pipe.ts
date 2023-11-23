@@ -10,7 +10,6 @@ export class FilterTablePipe implements PipeTransform {
 
   constructor(private paginationService: PaginationService) {}
   transform(products: Product[], search: string, pageSize: number): Product[] {
-    console.log(pageSize, search)
     if (search === '') {
       return products.slice(0, pageSize as number);
     }
@@ -18,9 +17,9 @@ export class FilterTablePipe implements PipeTransform {
     const p = products.filter(product => 
       product.id.toString().includes(search.toLowerCase()) ||
       product.name.toLowerCase().includes(search.toLowerCase()) ||
-      product.description.toLowerCase().includes(search.toLowerCase())
-      // product.date_release.toString().includes(search.toLowerCase()) ||
-      // product.date_revision.toLowerCase().includes(search.toLowerCase())
+      product.description.toLowerCase().includes(search.toLowerCase()) ||
+      product.date_release.toString().includes(search.toLowerCase()) ||
+      product.date_revision.toLowerCase().includes(search.toLowerCase())
     )
     this.paginationService.updateTotal(p.length);
     return p.slice(0, pageSize as number);
