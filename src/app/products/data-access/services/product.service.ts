@@ -10,7 +10,8 @@ import { Pagination } from 'src/app/shared/models/pagination';
   providedIn: 'root'
 })
 export class ProductService implements ProductRepository {
-  
+  productToEdit: BehaviorSubject<Product | null> = new BehaviorSubject<Product | null>(null);
+  productToDelete: BehaviorSubject<Product | null> = new BehaviorSubject<Product | null>(null);
   constructor(
     private http: HttpClient
   ) { }

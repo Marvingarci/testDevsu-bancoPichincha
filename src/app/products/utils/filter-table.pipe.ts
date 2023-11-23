@@ -7,7 +7,8 @@ import { PaginationService } from 'src/app/shared/data-access/pagination.service
   name: 'filterTable'
 })
 export class FilterTablePipe implements PipeTransform {
-  private readonly paginationService = inject(PaginationService);
+
+  constructor(private paginationService: PaginationService) {}
   transform(products: Product[], search: string, pageSize: number): Product[] {
     console.log(pageSize, search)
     if (search === '') {

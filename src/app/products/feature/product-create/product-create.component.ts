@@ -16,14 +16,15 @@ export class ProductCreateComponent implements OnInit, OnDestroy{
     id: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(3)]],
     name: ['', Validators.required],
     description: ['', Validators.required],
-    logo: ['',],
+    logo: ['', Validators.required],
     date_release: [new Date().toISOString().slice(0, 10), Validators.required],
     date_revision: [this.setAYearLater(new Date()), Validators.required],
   });
 
-  // lastValueRelease:
-
-  subs: Subscription[] = []  
+  productToEdit!: Product | null
+  subs: Subscription[] = [] 
+  title: string = 'Formulario de Registro'
+  editMode: boolean = false; 
 
   constructor(
     private fb: FormBuilder,
@@ -33,6 +34,20 @@ export class ProductCreateComponent implements OnInit, OnDestroy{
   ) { }
 
   ngOnInit(): void {
+    this.productToEdit = this.productService.productToEdit.value;
+    if(this.productToEdit != null){
+      this.editMode = true;
+      this.title = 'Editar Registro'
+      this.formProduct = this.fb.group({
+        id: [this.productToEdit.id, [Validators.required, Validators.maxLength(10), Validators.minLength(3)]],
+        name: [this.productToEdit.name, Validators.required],
+        description: [this.productToEdit.description, Validators.required],
+        logo: [this.productToEdit.logo, Validators.required],
+        date_release: [this.productToEdit.date_release, Validators.required],
+        date_revision: [this.productToEdit.date_revision, Validators.required],
+      });
+    }
+
     //when date_release changes, date_revision has to be a year later
     this.formProduct.get('date_release')?.valueChanges.subscribe(
       {
@@ -47,39 +62,46 @@ export class ProductCreateComponent implements OnInit, OnDestroy{
 
   } 
 
-  submit() {
+  submit(reason: string) {
     if (this.formProduct.valid) {
+      let observable = reason == 'edit' ? this.productService.updateProduct(this.formProduct.value as Product) 
+      : this.productService.createProduct(this.formProduct.value as Product);
       this.subs.push(
-        this.productService.createProduct(this.formProduct.value as Product).subscribe(
+        observable.subscribe(
           {
             next: (product: Product) =>{
               if(product.id)
               this.formProduct.reset();
-              this.toastService.showSuccess('Producto creado exitosamente');
+              this.toastService.showSuccess('Producto '+(reason == 'edit' ? 'Editado': 'Creado')+' exitosamente');
               this.router.navigate(['/products']);
             },
             error: (error) =>  {
               console.log(error)
-              if(error.error == "Can't create because product is duplicate")
+              if(error.error == "Can't create because product is duplicate"){
                 this.toastService.showWarning('El producto ya existe');
-              
+                this.formProduct.get('id')?.setErrors({duplicate: true})
+              }else if(error.error == "Not product found with that id"){
+                this.toastService.showWarning('El producto con ese ID no existe');
+                this.formProduct.get('id')?.setErrors({duplicate: true})
+              }
             }
           }
         )
       )
     }else{
-      this.markAllControlsAsDirty(this.formProduct)
+      this.markAllControlsAs(this.formProduct, true)
     }
   }
 
-  markAllControlsAsDirty(formGroup: FormGroup) {
+
+  markAllControlsAs(formGroup: FormGroup, condition: boolean) {
   Object.keys(formGroup.controls).forEach(controlName => {
     const control = formGroup.get(controlName);
     if (control) {
-      control.markAsDirty();
+      condition ? control.markAsDirty(): control.markAsPristine();
     }
   });
-}
+  }
 
   ngOnDestroy(): void {
     this.subs.forEach(sub => sub.unsubscribe())
@@ -88,5 +110,17 @@ export class ProductCreateComponent implements OnInit, OnDestroy{
   setAYearLater(date: Date) {
     date.setFullYear(date.getFullYear() + 1);
     return date.toISOString().slice(0, 10)
+  }
+
+  resetForm():void{
+    this.formProduct.setValue({
+      id: '',
+      name: '',
+      description: '',
+      logo: '',
+      date_release: new Date().toISOString().slice(0, 10),
+      date_revision: this.setAYearLater(new Date()),
+    })
+    this.markAllControlsAs(this.formProduct, false)
   }
 }

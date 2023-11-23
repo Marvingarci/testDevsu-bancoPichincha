@@ -6,6 +6,7 @@
       <th>Descripcion</th>
       <th>Fecha de Liberacion</th>
       <th>Fecha de Restructuracion</th>
+      <th></th>
     </tr>
   </thead>
   <tbody *ngIf="$paginator | async as paginator">
@@ -17,5 +18,24 @@
       <td>{{ product.description }}</td>
       <td>{{ product.date_release }}</td>
       <td>{{ product.date_revision }}</td>
+      <td>
+        <button class="options" (click)="selected == product.id ? selected = '' : selected = product.id" type="button" cdkOverlayOrigin #trigger="cdkOverlayOrigin">
+          {{selected == product.id ? "X" : "Options"}}
+          <ng-template
+            cdkConnectedOverlay
+            [cdkConnectedOverlayOrigin]="trigger"
+            [cdkConnectedOverlayOpen]="selected == product.id"
+            >
+              <ul class="example-list">
+                <li (click)="deleteProduct(product)">Eliminar</li>
+                <li (click)="editProduct(product)">Editar</li>
+              </ul>
+            </ng-template>
+        </button>       
+        
+        <!-- <button (click)="deleteProduct(product)">Eliminar</button>
+        <button (click)="editProduct(product)">Editar</button> -->
+      </td>
   </tbody>
 </table>
+

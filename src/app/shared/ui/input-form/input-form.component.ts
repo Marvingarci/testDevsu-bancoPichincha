@@ -44,7 +44,17 @@ export class InputFormComponent implements OnInit, ControlValueAccessor {
 
   setValue(value: Event) {
     const target = value.target as HTMLInputElement;
-    this.value = target.value
+    //validate if label is date_release, should be a date from now and then, not the past
+    if(this.label == 'Fecha de Liberacion'){
+      const date = new Date(target.value);
+      const now = new Date();
+      if(date < now){
+        this.fc.setErrors({pastDate: true});
+        this.fc.markAsDirty();
+        return;
+      }
+    } 
+    this.value = target.value.trim();
     this.onChange(this.value);
   }
 

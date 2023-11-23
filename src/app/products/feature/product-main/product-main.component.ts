@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ProductService } from '../../data-access/services/product.service';
 import { Observable, map, tap } from 'rxjs';
 import { Product } from '../../data-access/models/product';
-import { Pagination } from 'src/app/shared/models/pagination';
 import { PaginationService } from 'src/app/shared/data-access/pagination.service';
 import { ProductResponseMapper } from '../../utils/product-reponse.mapper';
 
@@ -14,10 +13,11 @@ import { ProductResponseMapper } from '../../utils/product-reponse.mapper';
 export class ProductMainComponent implements OnInit {
   products$ : Observable<Product[]> = new Observable<Product[]>();
   searchValue: string = '';
-
+  @ViewChild('dialog') dialogTemplate: any;
   constructor(
     private productService: ProductService,
-    private paginatorService: PaginationService  ) { }
+    private paginatorService: PaginationService,
+    ) { }
 
   ngOnInit(): void {
     this.products$ = this.productService.getProducts().pipe(
@@ -27,5 +27,7 @@ export class ProductMainComponent implements OnInit {
       map((products: Product[]) => products.map((product: Product) => ProductResponseMapper.fromResponse(product))),
     );
   }
+
+ 
 
 }

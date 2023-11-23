@@ -8,6 +8,7 @@ import { AuthorIdInterceptor } from './shared/utils/author-id.interceptor';
 import { NavbarComponent } from './shared/ui/navbar/navbar.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {OverlayModule} from '@angular/cdk/overlay';
 
 const routes: Route[] = [
   {
@@ -31,12 +32,13 @@ const routes: Route[] = [
     AppRoutingModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
-    NavbarComponent,
+    NavbarComponent,  
     ToastrModule.forRoot({
       timeOut: 2000,
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
     }),
+    OverlayModule
     
   ],
   providers: [

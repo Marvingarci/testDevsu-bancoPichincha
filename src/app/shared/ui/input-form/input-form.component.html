@@ -1,6 +1,6 @@
 <div>
     <label for="">{{label}}</label>
-    <input [(ngModel)]="value" class="inp" [disabled]="disabled" [type]="type" [ngClass]="{'error': fc.dirty && fc.errors != null}" (input)="setValue($event)" type="text" [placeholder]="placeholder">
+    <input [(ngModel)]="value" class="inp" [min]="value" [disabled]="disabled" [type]="type" [ngClass]="{'error': fc.dirty && fc.errors != null}" (input)="setValue($event)" type="text" [placeholder]="placeholder">
     <div #error *ngIf="fc.dirty && fc.errors != null">
         <ng-container *ngIf="fc.errors as e">
             <span *ngIf="e.required">Este campo es requerido</span>
@@ -12,7 +12,8 @@
             <span *ngIf="e.max">Este campo debe ser menor o igual a {{e.max.max}}</span>
             <span *ngIf="e.minDate">Este campo debe ser mayor o igual a {{e.minDate.minDate | date}}</span>
             <span *ngIf="e.maxDate">Este campo debe ser menor o igual a {{e.maxDate.maxDate | date}}</span>
-            <span *ngIf="e.unique">Este campo debe ser único</span>
+            <span *ngIf="e.duplicate">Este Id ya esta en uso</span>
+            <span *ngIf="e.pastDate ">Esta Fecha debe ser igual o mayor a la fecha actual</span>
         </ng-container>
     </div>
     <!-- <span #error>{{fc.errors | json}}</span> -->

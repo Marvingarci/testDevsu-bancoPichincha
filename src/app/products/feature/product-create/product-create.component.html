@@ -1,9 +1,10 @@
 <div class="main-container">
     <section>
-        <span>Formulario de Registro</span>
+        <span class="back" routerLink="/products"><</span>
+        <span>{{title}}</span>
     </section>
     <form [formGroup]="formProduct">
-        <app-input-form label="Id" [type]="'text'" placeholder="Ingrese el id" formControlName="id" [fc]="formProduct.get('id')"></app-input-form>
+        <app-input-form label="Id" [disabled]="editMode" [type]="'text'" placeholder="Ingrese el id" formControlName="id" [fc]="formProduct.get('id')"></app-input-form>
         <app-input-form label="Nombre" [type]="'text'" placeholder="Ingrese el Nombre" formControlName="name" [fc]="formProduct.get('name')"></app-input-form>
         <app-input-form label="Descripcion" [type]="'text'" placeholder="Ingrese la descripcion" formControlName="description" [fc]="formProduct.get('description')"></app-input-form>
         <app-input-form label="Logo" [type]="'text'" placeholder="Ingrese la URL logo" formControlName="logo" [fc]="formProduct.get('logo')"></app-input-form>
@@ -16,10 +17,15 @@
         <!-- <input formControlName="date_release" type="date"> -->
         <!-- <input formControlName="date_revision" type="date"> -->
     </form>
-    <div class="buttons">
-        <button type="button" class="btn form gray" (click)="formProduct.reset()">Reiniciar</button>
-        <button type="button" class="btn form " (click)="submit()">Agregar</button>
-    </div>
+    <div class="buttons" *ngIf="!editMode else otherbuttons">
+        <button type="button" class="btn form gray" (click)="resetForm()">Reiniciar</button>
+        <button type="button" class="btn form " (click)="submit('new')">Agregar</button>
+    </div>      
+    <ng-template #otherbuttons>
+        <div class="buttons">
+            <button type="button" class="btn form " (click)="submit('edit')">Editar</button>
+        </div>
+    </ng-template>
     {{formProduct.value | json}}
     {{formProduct.get('id')?.errors | json}}
     <!-- <section class="search-input">
