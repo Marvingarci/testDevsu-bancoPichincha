@@ -27,7 +27,6 @@ export class InputFormComponent implements OnInit, ControlValueAccessor {
   onChange : (value: any) => void = () => {};
 
   ngOnInit(): void {
-    console.log(this.fc.errors);
   }
 
   constructor() { }
@@ -44,7 +43,12 @@ export class InputFormComponent implements OnInit, ControlValueAccessor {
 
   setValue(value: Event) {
     const target = value.target as HTMLInputElement;
-    //validate if label is date_release, should be a date from now and then, not the past
+    this.validateDate(target)
+    this.value = target.value.trim();
+    this.onChange(this.value);
+  }
+
+  validateDate(target: HTMLInputElement){
     if(this.label == 'Fecha de Liberacion'){
       const date = new Date(target.value);
       const now = new Date();
@@ -54,17 +58,9 @@ export class InputFormComponent implements OnInit, ControlValueAccessor {
         return;
       }
     } 
-    this.value = target.value.trim();
-    this.onChange(this.value);
   }
 
   getArry(arry: any) {
     return Object.entries(arry);
-  }
-
-  errors = {
-    required: 'Este campo es requerido',
-    minlength: 'El valor es muy corto',
-    maxlength: 'El valor es muy largo'
   }
 }

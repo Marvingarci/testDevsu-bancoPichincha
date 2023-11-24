@@ -18,4 +18,22 @@ describe('InputComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it(`value should be ''`, () => {
+    expect(component.value).toBe('');
+  });
+
+  it(`valueChange should be an EventEmitter`, () => {
+    expect(component.valueChange).toBeTruthy();
+  });
+
+  it(`onChange should emit valueChange`, () => {
+    spyOn(component.valueChange, 'emit');
+    const event: any = { target: { value: 'test' } };
+    component.onChange(event as any);
+    expect(component.valueChange.emit).toHaveBeenCalledWith('test');
+  });
+
+  
+
 });
