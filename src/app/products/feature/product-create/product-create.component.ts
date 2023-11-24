@@ -14,9 +14,9 @@ import { ToastService } from 'src/app/shared/data-access/toast.service';
 export class ProductCreateComponent implements OnInit, OnDestroy{
   formProduct: FormGroup = this.fb.group({
     id: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(3)]],
-    name: ['', Validators.required],
-    description: ['', Validators.required],
-    logo: ['', Validators.required],
+    name: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
+    description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]],
+    logo: ['', [Validators.required, Validators.pattern(/^(http|https):\/\/[^ "]+$/)]],
     date_release: [new Date().toISOString().slice(0, 10), Validators.required],
     date_revision: [this.setAYearLater(new Date()), Validators.required],
   });

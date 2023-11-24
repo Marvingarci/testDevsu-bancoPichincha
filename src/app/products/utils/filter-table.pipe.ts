@@ -11,6 +11,7 @@ export class FilterTablePipe implements PipeTransform {
   constructor(private paginationService: PaginationService) {}
   transform(products: Product[], search: string, pageSize: number): Product[] {
     if (search === '') {
+      this.paginationService.updateTotal(products.length);
       return products.slice(0, pageSize as number);
     }
 

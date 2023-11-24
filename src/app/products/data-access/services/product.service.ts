@@ -1,10 +1,9 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { ProductRepository } from '../repositories/product.repository';
 import { Product } from '../models/product';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'env.development';
-import { Pagination } from 'src/app/shared/models/pagination';
 
 @Injectable({
   providedIn: 'root'

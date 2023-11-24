@@ -23,6 +23,7 @@ export class InputFormComponent implements OnInit, ControlValueAccessor {
   @Input() disabled: boolean = false;
   @Input() fc: any | null = {};
   value: any = '';
+  today = new Date().toISOString().slice(0, 10);
   
   onChange : (value: any) => void = () => {};
 

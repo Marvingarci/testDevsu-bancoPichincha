@@ -6,7 +6,7 @@ import { Pagination } from '../models/pagination';
   providedIn: 'root'
 })
 export class PaginationService {
-  private paginator$: BehaviorSubject<Pagination> = new BehaviorSubject<Pagination>({pageSize: 6, total: 0, page: 1});
+  private paginator$: BehaviorSubject<Pagination> = new BehaviorSubject<Pagination>({pageSize: 5, total: 0, page: 1});
 
   getPaginator(): Observable<Pagination>{
     return this.paginator$.asObservable();

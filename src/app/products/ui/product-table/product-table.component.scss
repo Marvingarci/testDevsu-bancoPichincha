@@ -1,4 +1,6 @@
+
 table{
+
     padding: 20px;
     width: 100%;
     background-color: white;
@@ -19,6 +21,66 @@ table{
         outline: none;
         cursor: pointer;
         background-color: transparent;
+    }
+    @media screen and (max-width: 1020px) {
+        display: none;
+    }
+}
+
+.md{
+    // display: none;
+    .container-md{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        padding: 20px;
+        background-color: white;
+        .item-md{
+            background-color: var(--gray-color);
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            .item-md-title{
+                font-weight: bold;
+                font-size: 1.2rem;
+            }
+            .item-md-body{
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                .item-md-body-title{
+                    font-weight: bold;
+                    font-size: 1rem;
+                }
+                .item-md-body-content{
+                    font-size: 1rem;
+                }
+            }
+            .item-container{
+                display: flex;
+                flex-direction: row;
+                gap: 10px;
+                svg{
+                    width: 30px;
+                    height: 30px;
+                    margin: 0 auto;
+                    display: block;
+                    cursor: pointer;
+                    color: var(--primary-color);
+                }
+            }
+        }
+        @media screen and (min-width: 900px) {  
+            grid-template-columns: repeat(3, 1fr);
+        }
+        @media screen and (max-width: 600px) {  
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+    @media screen and (min-width: 1020px) {
+        display: none;      
     }
 }
 
@@ -62,7 +124,8 @@ table{
   .example-list > li :hover{
     background-color: -var(--secondary-color);
   }
-  
+
+
   
 
   

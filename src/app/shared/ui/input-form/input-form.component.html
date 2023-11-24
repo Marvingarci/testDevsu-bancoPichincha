@@ -1,6 +1,6 @@
 <div>
     <label for="">{{label}}</label>
-    <input [(ngModel)]="value" class="inp" [min]="value" [disabled]="disabled" [type]="type" [ngClass]="{'error': fc.dirty && fc.errors != null}" (input)="setValue($event)" type="text" [placeholder]="placeholder">
+    <input [(ngModel)]="value" class="inp" [min]="today" [disabled]="disabled" [type]="type" [ngClass]="{'error': fc.dirty && fc.errors != null}" (input)="setValue($event)" type="text" [placeholder]="placeholder">
     <div #error *ngIf="fc.dirty && fc.errors != null">
         <ng-container *ngIf="fc.errors as e">
             <span *ngIf="e.required">Este campo es requerido</span>
