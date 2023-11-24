@@ -1,27 +1,95 @@
-# TestDevsuBancoPichincha
+# Banco Pichincha Gestion de Productos
+## Marvin Alejandro Garcia Gonzales
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.6.
+[![N|Solid](https://www.bolsadequito.com/images/2018/06/05/LOGO-BANCO-PICHINCHA-min.jpg)](https://www.pichincha.com)
 
-## Development server
+Aplicativo para demostracion de Habilidades de FrontEnd, destinada a la gestion de productos bancarios.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Crear Eficientemente productos a partir de formularios dinamicos
+- Edicion y Mantenimiento de dichos productos
+- Eliminacion de Produc
+- ✨Magica✨
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Tecnologias Usadas
 
-## Build
+Dillinger uses a number of open source projects to work properly:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- [Angular] - Web Framework soporte Google
+- [Karma] - Herramienta de Testing
+- [Git] - Control de Versiones
 
-## Running unit tests
+## Requerimientos
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- AngularCLI  V19+
+- NodeJS      V20+
+- Git         V2.30+
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Instalacion
 
-## Further help
+Pichincha App requiere [Node.js](https://nodejs.org/) v20+.
+Instalar las dependencias necesarias.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```sh
+cd /directorio-app
+npm i
+```
+## Desarrollo
+Requiere AngularCLI instalado
+```sh
+ng serve
+```
+
+Para ambientes de Produccion debes cambiar el endpoint o el authorId en env.development.ts
+
+```sh
+URI: 'https://tribu-ti-staffing-desarrollo-afangwbmcrhucqfh.z01.azurefd.net',
+authorId: '70',  
+```
+
+## Testing
+
+Para correr las pruebas unitarias, debes correr el siguiente comando:
+
+```sh
+ng test
+```
+
+Para obtener el reporte de cobertura debes correr:
+
+```sh
+ng test --code-coverage
+```
+
+Una vez terminado, en la raiz del proyecto hay una carpeta coverage, y dentro de test-devsu-banco-pichincha hay un archivo indexz.html, usa live server.
+
+
+#### Compilado
+
+Para produccion:
+
+```sh
+ng build
+```
+## Licencia
+
+MIT
+
+**Free Software**
+
+[//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
+
+   [git-repo-url]: <https://github.com/Marvingarci/testDevsu-bancoPichincha>
+   [Marvin Garcia]: <https://github.com/Marvingarci>
+   [jQuery]: <http://jquery.com>
+   [Karma]: <https://karma-runner.github.io/latest/index.html>
+   [Angular]: <http://angular.io>
+   [Git]: <https://github.com>
+
+   [PlDb]: <https://github.com/joemccann/dillinger/tree/master/plugins/dropbox/README.md>
+   [PlGh]: <https://github.com/joemccann/dillinger/tree/master/plugins/github/README.md>
+   [PlGd]: <https://github.com/joemccann/dillinger/tree/master/plugins/googledrive/README.md>
+   [PlOd]: <https://github.com/joemccann/dillinger/tree/master/plugins/onedrive/README.md>
+   [PlMe]: <https://github.com/joemccann/dillinger/tree/master/plugins/medium/README.md>
+   [PlGa]: <https://github.com/RahulHP/dillinger/blob/master/plugins/googleanalytics/README.md>
