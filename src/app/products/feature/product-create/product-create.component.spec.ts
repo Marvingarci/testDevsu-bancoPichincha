@@ -5,7 +5,7 @@ import { ProductShellModule } from '../product-shell/product-shell.module';
 import { ProductService } from '../../data-access/services/product.service';
 import { ToastService } from 'src/app/shared/data-access/toast.service';
 import { Router } from '@angular/router';
-import { productMockEdit, productMockNonExists, productMockValid, productMockValidDate } from '../../utils/mocks/products.mock';
+import { productMockEdit, productMockNonExists, productMockValid, productMockValidDate, productMockValidDateStatic, productMockValidStatic } from '../../utils/mocks/products.mock';
 import { of, throwError } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { fakeAsync, tick } from '@angular/core/testing';
@@ -70,12 +70,13 @@ describe('ProductCreateComponent', () => {
   });
 
   it('should set editMode and title when productToEdit is not null', () => {
-    component.productToEdit = productMockValidDate 
+    const mockProduct = productMockValidDateStatic;
+    component.productToEdit = mockProduct 
     component.checkIfProductExists();
 
     expect(component.editMode).toBe(true);
     expect(component.title).toBe('Editar Registro');
-    expect(component.formProduct.value).toEqual(productMockValid);
+    expect(component.formProduct.value).toEqual(productMockValidStatic);
   });
 
   it('should call productService.createProduct() when submit() is called', () => {
@@ -121,45 +122,42 @@ describe('ProductCreateComponent', () => {
       date_revision: [mockProduct.date_revision],
     });
 
-    const productServiceSpy = spyOn(productService, 'updateProduct').and.returnValue(of(mockProduct));
-    const toastServiceSpy = spyOn(toastService, 'showSuccess');
+    const productServiceUpdateSpy = spyOn(productService, 'updateProduct').and.returnValue(of(mockProduct));
+    const toastServiceSuccessSpy = spyOn(toastService, 'showSuccess');
+    const toastServiceWarningSpy = spyOn(toastService, 'showWarning');
     const routerSpy = spyOn(router, 'navigate');
-  
+    
+    // if product exists and edit mode is true
+    let productServiceVerificationSpy = spyOn(productService, 'verifyProduct').and.returnValue(of(true));
     component.submit('edit');
-  
-    expect(productServiceSpy).toHaveBeenCalled();
-    // expect(toastServiceSpy).toHaveBeenCalledWith('Producto Editado exitosamente');
+    expect(toastServiceSuccessSpy).toHaveBeenCalledWith('Producto Editado exitosamente');
     expect(routerSpy).toHaveBeenCalledWith(['/products']);
+    
+    productServiceVerificationSpy.and.returnValue(of(false));
+    component.submit('new');
+    
+    // if product doesnt exists and edit mode is false
+    productServiceVerificationSpy.and.returnValue(of(true));
+    component.submit('new');
+    expect(toastServiceWarningSpy).toHaveBeenCalledWith('El producto ya existe');
+    
+    
+    // if product doesnt exists and edit mode is true
+    productServiceVerificationSpy.and.returnValue(of(false));
+    component.submit('edit');
+    expect(toastServiceWarningSpy).toHaveBeenCalledWith('El producto ya existe');
 
-    mockProduct = productMockValid;
-    component.submit('create');
-    expect(productServiceSpy).toHaveBeenCalled();
-    expect(toastServiceSpy).toHaveBeenCalled();
-    expect(routerSpy).toHaveBeenCalledWith(['/products']);
+    expect(productServiceVerificationSpy).toHaveBeenCalled();
 
   });
 
   it('should handle duplicate product error', () => {
-    // Simulate a form error by making it invalid
-    // Modify form controls to make it invalid (e.g., omit required fields)
     component.formProduct.patchValue(productMockEdit);
-
-    const spyCreateProduct = spyOn(productService, 'createProduct').and.returnValue(throwError({ error: "Can't create because product is duplicate" }));
-    const toastServiceSpy = spyOn(toastService, 'showWarning');
+    const verifyProductSpy = spyOn(productService, 'verifyProduct').and.returnValue(of(true));
+    const verifyToastSpy = spyOn(toastService, 'showWarning')
     expect(component.formProduct.valid).toBeTrue();
     component.submit('create');
-
-    expect(spyCreateProduct).toHaveBeenCalled();
-    expect(toastServiceSpy).toHaveBeenCalledWith('El producto ya existe');
-
-    component.formProduct.patchValue(productMockNonExists);
-    const spyUpdatedProduct = spyOn(productService, 'updateProduct').and.returnValue(throwError({ error: "Not product found with that id" }));
-    expect(component.formProduct.valid).toBeTrue();
-    component.submit('edit');
-
-    expect(spyUpdatedProduct).toHaveBeenCalled();
-    expect(toastServiceSpy).toHaveBeenCalledWith('El producto con ese ID no existe');
-
+    expect(verifyProductSpy).toHaveBeenCalledWith(productMockEdit.id);
   });
 
   it('markAllControlsAs should call markAllControlsAsTouched() when submit() is called', fakeAsync(() => {

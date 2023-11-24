@@ -78,8 +78,10 @@ export class ProductCreateComponent implements OnInit, OnDestroy{
               return this.productService.createProduct(this.formProduct.value as Product)
             }else if(exists && reason == 'new'){
               return throwError({error: 'Can\'t create because product is duplicate'})
-            }else{
+            }else if(!exists && reason == 'edit'){
               return throwError({error: 'Not product found with that id'})
+            }else{
+              return throwError({error: 'Error'})
             }
           })
         ).subscribe(

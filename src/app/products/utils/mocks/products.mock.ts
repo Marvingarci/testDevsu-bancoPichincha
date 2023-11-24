@@ -118,6 +118,24 @@ export const productMockValid: Product = {
   date_revision: "2024-11-22"
 }
 
+export const productMockValidStatic: Product = {
+  id: '0101',
+  name: "TEST VALID",
+  description: "Cash Back 8%",
+  logo: "https://www.bancocuscatlan.com.hn/images/tarjetas/multipremios-oro.png",
+  date_release: "2023-11-22",
+  date_revision: "2024-11-22"
+}
+
+export const productMockValidDateStatic: Product = {
+  id: '0101',
+  name: "TEST VALID",
+  description: "Cash Back 8%",
+  logo: "https://www.bancocuscatlan.com.hn/images/tarjetas/multipremios-oro.png",
+  date_release: "22-11-2023",
+  date_revision: "22-11-2024"
+}
+
 export const productMockValidDate: Product = {
   id: generateRandomNumber().toString(),
   name: "TEST VALID",
@@ -139,9 +157,9 @@ export const productMockInvalid: Product = {
 
 export const productMockEdit: Product = {
   id: "0101",
-  name: "REPEATED",
-  description: "NONE",
-  logo: "some logo",
+  name: "REPEATED now a date",
+  description: "NONE is the description mock",
+  logo: "https://www.tarjetascuscatlan.com.gt/images/multipuntos-header.png",
   date_release: "2023-11-24",
   date_revision: "2024-11-24"
 }
