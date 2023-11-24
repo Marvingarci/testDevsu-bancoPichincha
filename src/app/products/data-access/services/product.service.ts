@@ -14,8 +14,9 @@ export class ProductService implements ProductRepository {
   constructor(
     private http: HttpClient
   ) { }
-
-
+  verifyProduct(idProduct: string): Observable<boolean> {
+    return this.http.get<boolean>(`${environment.URI}/bp/products/verification?id=${idProduct}`);
+  }
 
   createProduct(product: Product): Observable<Product> {
     return this.http.post<Product>(`${environment.URI}/bp/products`, product); 

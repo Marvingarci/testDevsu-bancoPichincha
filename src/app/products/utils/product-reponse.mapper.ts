@@ -8,8 +8,8 @@ export class ProductResponseMapper {
             name: response.name,
             description: response.description,
             logo: response.logo,
-            date_release: moment(response.date_release).format('YYYY-MM-DD'),
-            date_revision: moment(response.date_revision).format('YYYY-MM-DD'),
+            date_release: moment(response.date_release).add(1, 'day').format('DD-MM-YYYY') ,
+            date_revision: moment(response.date_revision).add(1, 'day').format('DD-MM-YYYY'),
         };
     }
 }

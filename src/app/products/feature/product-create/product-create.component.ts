@@ -2,9 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductService } from '../../data-access/services/product.service';
 import { Product } from '../../data-access/models/product';
-import { Subscription } from 'rxjs';
+import { Subscription, switchMap, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { ToastService } from 'src/app/shared/data-access/toast.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-product-create',
@@ -42,8 +43,8 @@ export class ProductCreateComponent implements OnInit, OnDestroy{
         name: [this.productToEdit.name, Validators.required],
         description: [this.productToEdit.description, Validators.required],
         logo: [this.productToEdit.logo, Validators.required],
-        date_release: [this.productToEdit.date_release, Validators.required],
-        date_revision: [this.productToEdit.date_revision, Validators.required],
+        date_release: [ moment(this.productToEdit.date_release, 'DD-MM-YYYY').format('YYYY-MM-DD'), Validators.required],
+        date_revision: [moment(this.productToEdit.date_revision, 'DD-MM-YYYY').format('YYYY-MM-DD'), Validators.required],
       });
     }
 
@@ -68,10 +69,20 @@ export class ProductCreateComponent implements OnInit, OnDestroy{
 
   submit(reason: string) {
     if (this.formProduct.valid) {
-      let observable = reason == 'edit' ? this.productService.updateProduct(this.formProduct.value as Product) 
-      : this.productService.createProduct(this.formProduct.value as Product);
       this.subs.push(
-        observable.subscribe(
+        this.productService.verifyProduct(this.formProduct.get('id')?.value).pipe(
+          switchMap((exists: boolean) => {
+            if(exists && reason == 'edit'){
+              return this.productService.updateProduct(this.formProduct.value as Product)
+            }else if(!exists && reason == 'new'){
+              return this.productService.createProduct(this.formProduct.value as Product)
+            }else if(exists && reason == 'new'){
+              return throwError({error: 'Can\'t create because product is duplicate'})
+            }else{
+              return throwError({error: 'Not product found with that id'})
+            }
+          })
+        ).subscribe(
           {
             next: (product: Product) =>{
               if(product.id)
@@ -80,7 +91,6 @@ export class ProductCreateComponent implements OnInit, OnDestroy{
               this.router.navigate(['/products']);
             },
             error: (error) =>  {
-              console.log(error)
               if(error.error == "Can't create because product is duplicate"){
                 this.toastService.showWarning('El producto ya existe');
                 this.formProduct.get('id')?.setErrors({duplicate: true})

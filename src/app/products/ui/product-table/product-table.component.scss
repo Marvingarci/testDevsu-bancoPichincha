@@ -41,6 +41,7 @@ table{
             border-radius: 5px;
             display: flex;
             flex-direction: column;
+            justify-content: space-around;
             gap: 10px;
             .item-md-title{
                 font-weight: bold;

@@ -39,7 +39,6 @@ export class InputFormComponent implements OnInit, ControlValueAccessor {
     this.onChange = fn;
   }
   registerOnTouched(fn: any): void {
-    console.log('touched');
   }
 
   setValue(value: Event) {

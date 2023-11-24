@@ -118,6 +118,16 @@ export const productMockValid: Product = {
   date_revision: "2024-11-22"
 }
 
+export const productMockValidDate: Product = {
+  id: generateRandomNumber().toString(),
+  name: "TEST VALID",
+  description: "Cash Back 8%",
+  logo: "https://www.bancocuscatlan.com.hn/images/tarjetas/multipremios-oro.png",
+  date_release: "22-11-2023",
+  date_revision: "22-11-2024"
+}
+
+
 export const productMockInvalid: Product = {
   id: "01",
   name: "REPEATED",

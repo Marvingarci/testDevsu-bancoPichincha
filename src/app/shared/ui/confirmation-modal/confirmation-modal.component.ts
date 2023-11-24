@@ -26,7 +26,6 @@ export class ConfirmationModalComponent {
     this.productService.deleteProduct(this.productToDelete?.id as string).subscribe(
       {
         next: (response) => {
-          console.log(response)
           this.productService.productToDelete.next(null);
           this.toastr.showSuccess('Producto eliminado exitosamente');
           this.close.emit();
