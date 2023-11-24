@@ -10,10 +10,13 @@ Aplicativo para demostracion de Habilidades de FrontEnd, destinada a la gestion 
 - Eliminacion de Produc
 - ✨Magica✨
 
+## Arquitectura
+
+- NX scaffolding(googler team)
+- Clean Code y SOLID
 
 ## Tecnologias Usadas
 
-Dillinger uses a number of open source projects to work properly:
 
 - [Angular] - Web Framework soporte Google
 - [Karma] - Herramienta de Testing
@@ -33,7 +36,7 @@ Instalar las dependencias necesarias.
 
 ```sh
 cd /directorio-app
-npm i
+npm i --force
 ```
 ## Desarrollo
 Requiere AngularCLI instalado
